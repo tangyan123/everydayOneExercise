@@ -7,3 +7,11 @@ spring:
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: 123456
+
+
+knife4j:
+  enable: true # 开启 knife4j 增强功能
+  basic:
+    enable: false # 开启文档访问权限（首次访问，会在浏览器开启弹框要求输入用户名密码）
+    username: admin # 账号
+    password: 123456
