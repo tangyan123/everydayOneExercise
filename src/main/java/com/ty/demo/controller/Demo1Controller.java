@@ -16,14 +16,14 @@ import java.util.Map;
 @Api( tags="测试")
 public class Demo1Controller {
 
-    @GetMapping("test")
+    @GetMapping("/test")
     @ApiOperation("测试1")
     public String test1(){
         return "test";
     }
 
 
-    @GetMapping("test2")
+    @GetMapping("/test2")
     @ApiOperation("测试2")
     public Student test2(Student stu){
         Student student=new Student();

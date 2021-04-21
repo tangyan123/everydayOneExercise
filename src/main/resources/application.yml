@@ -7,11 +7,22 @@ spring:
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: 123456
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
 
 knife4j:
-  enable: true # ¿ªÆô knife4j ÔöÇ¿¹¦ÄÜ
+  enable: true # ï¿½ï¿½ï¿½ï¿½ knife4j ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½
   basic:
-    enable: false # ¿ªÆôÎÄµµ·ÃÎÊÈ¨ÏŞ£¨Ê×´Î·ÃÎÊ£¬»áÔÚä¯ÀÀÆ÷¿ªÆôµ¯¿òÒªÇóÊäÈëÓÃ»§ÃûÃÜÂë£©
-    username: admin # ÕËºÅ
+    enable: false # ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ş£ï¿½ï¿½×´Î·ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©
+    username: admin # ï¿½Ëºï¿½
     password: 123456
