@@ -1,4 +1,4 @@
-package com.ty.demo.controller;
+package com.ty.demo.controller.redis;
 
 import com.ty.demo.entity.Student;
 import io.swagger.annotations.Api;
