@@ -38,8 +38,6 @@ public class FormatPicColntroller {
                 false, // 是否生成工具
                 false  // 是否生成 URL 链接
         );
-        FormatPic.setView(chart);
-        FormatPic.configFont(chart);
         FileOutputStream fos_jpg = null;
         try {
             fos_jpg = new FileOutputStream("E:\\formatPic\\fruit.jpg");
