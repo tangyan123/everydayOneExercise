@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.analysis.function.Add;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,24 +16,23 @@ import java.util.List;
 @Slf4j
 public class WordTestColntroller {
     public static void main(String[] args) {
-        HashMap<String, Object> map = new HashMap<>(4);
-
+        HashMap<String, Object> map = new HashMap<>(20);
         //模拟饼状图数据
         HashMap<String, Integer> datas = new HashMap<>(3);
-
-        ImageEntity image=new ImageEntity();
-        image.setHeight(280);
-        image.setWidth(315);
-        image.setUrl("E:\\formatPic\\PM2.5_1.png");
-        image.setType(ImageEntity.URL);
-        map.put("PM2_1", image);
-        ImageEntity image2=new ImageEntity();
-        image2.setHeight(280);
-        image2.setWidth(315);
-        image2.setUrl("E:\\formatPic\\PM2.5_2.png");
-        image2.setType(ImageEntity.URL);
-        map.put("PM2_2", image2);
-
+        List<String>pathList=addPath();
+        for (String s : pathList) {
+            ImageEntity image=new ImageEntity();
+            image.setHeight(280);
+            image.setWidth(300);
+            image.setUrl(s);
+            image.setType(ImageEntity.URL);
+            s= s.substring(0,s.indexOf("."));
+            System.out.println(s.substring(13)+"---"+image.getUrl());
+            map.put(s.substring(13), image);
+        }
+        map.put("createDate","2021年04月25日");
+        map.put("month",4);
+        map.put("year","2021");
       /*  //模拟其它普通数据
         map.put("username", "张三");
         map.put("date", "2019-10-10");
@@ -54,5 +55,19 @@ public class WordTestColntroller {
         //word模板相对路径、word生成路径、word生成的文件名称、数据源
         WordUtil.exportWord("E:\\formatPic\\wordTest.docx", "E:\\formatPic\\", "test.docx", map);
     }
+    public static List<String> addPath(){
+        List<String>pathList=new ArrayList<>();
+        pathList.add("E:\\formatPic\\PM2_1.png");
+        pathList.add("E:\\formatPic\\PM2_2.png");
+        pathList.add("E:\\formatPic\\PM10_1.png");
+        pathList.add("E:\\formatPic\\PM10_2.png");
+        pathList.add("E:\\formatPic\\SO2_1.png");
+        pathList.add("E:\\formatPic\\SO2_2.png");
+        pathList.add("E:\\formatPic\\NO2_1.png");
+        pathList.add("E:\\formatPic\\NO2_2.png");
+        pathList.add("E:\\formatPic\\O3_1.png");
+        pathList.add("E:\\formatPic\\O3_2.png");
+        return  pathList;
 
+    }
 }

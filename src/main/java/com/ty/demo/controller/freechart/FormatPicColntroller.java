@@ -1,89 +1,144 @@
 package com.ty.demo.controller.freechart;
 
+import com.ty.demo.utils.CustomRenderer;
 import com.ty.demo.utils.FormatPic;
-import org.apache.poi.hpsf.Decimal;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DatasetUtilities;
+import org.jfree.ui.TextAnchor;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class FormatPicColntroller {
-    public static void main(String[] args) throws IOException {
-        //创建主题样式
-        StandardChartTheme standardChartTheme=new StandardChartTheme("CN");
-        //设置标题字体
-        standardChartTheme.setExtraLargeFont(new Font("隶书", Font.BOLD,20));
-        //设置图例的字体
-        standardChartTheme.setRegularFont(new Font("宋书",Font.PLAIN,15));
-        //设置轴向的字体
-        standardChartTheme.setLargeFont(new Font("宋书",Font.PLAIN,15));
-        //应用主题样式
-        ChartFactory.setChartTheme(standardChartTheme);
-        CategoryDataset dataset = getDataSet();
-        JFreeChart chart = ChartFactory.createBarChart3D(
-                "PM2.5同比改善率（%）", // 图表标题
-                "", // 目录轴的显示标签
-                "", // 数值轴的显示标签
-                dataset, // 数据集
-                PlotOrientation.VERTICAL, // 图表方向：水平、垂直
-                true,  // 是否显示图例(对于简单的柱状图必须是 false)
-                false, // 是否生成工具
-                false  // 是否生成 URL 链接
-        );
-        FileOutputStream fos_jpg = null;
+    /**
+     * 创建JFreeChart Bar Chart（柱状图）
+     */
+    public static void main(String[] args) {
+        // 步骤1：创建CategoryDataset对象（准备数据）-1.57D
+        CategoryDataset dataset = O3_1();
+        // 步骤2：根据Dataset 生成JFreeChart对象，以及做相应的设置
+        JFreeChart freeChart =FormatPic.createChart(dataset,10D);
+        // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
+        saveAsFile(freeChart, "E:\\formatPic\\O3Test_2.png", 500, 400);
+    }
+
+    // 保存为文件
+    public static void saveAsFile(JFreeChart chart, String outputPath, int weight, int height) {
+        FileOutputStream out = null;
         try {
-            fos_jpg = new FileOutputStream("E:\\formatPic\\fruit.jpg");
-            ChartUtilities.writeChartAsJPEG(fos_jpg,chart,400,300);
+            File outFile = new File(outputPath);
+            if (!outFile.getParentFile().exists()) {
+                outFile.getParentFile().mkdirs();
+            }
+            out = new FileOutputStream(outputPath);
+            // 保存为PNG文件
+            ChartUtilities.writeChartAsPNG(out, chart, weight, height);
+            out.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
-            try {
-                fos_jpg.close();
-            } catch (Exception e) {}
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    // do nothing
+                }
+            }
         }
     }
-    /**
-     * 获取一个演示用的简单数据集对象
-     * @return
-     */
-    private static CategoryDataset getDataSet() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(30.0, "23.9", "薛城区");
-        dataset.addValue(25.0, "20.6", "峰城区");
-        dataset.addValue(20.0, "20.4", "山亭区");
-        dataset.addValue(15.0, "17.2", "高新区");
-        dataset.addValue(10.0, "15.1", "滕州市");
-        dataset.addValue(5.0, "14.1", "市中区");
-        dataset.addValue(0.0, "12.3", "台儿庄区");
+
+
+    // 创建CategoryDataset对象
+    public static CategoryDataset PM2_1() {
+        double[][] data = new double[][] { { 74, 82, 83, 85, 85, 90, 93} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "山亭区", "高新区", "薛城区", "市中区", "峄城区", "滕州市","台儿庄区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
         return dataset;
     }
-    /**
-     * 获取一个演示用的组合数据集对象
-     * @return
-     */
-    private static CategoryDataset getDataSet2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(100, "北京", "苹果");
-        dataset.addValue(100, "上海", "苹果");
-        dataset.addValue(100, "广州", "苹果");
-        dataset.addValue(200, "北京", "梨子");
-        dataset.addValue(200, "上海", "梨子");
-        dataset.addValue(200, "广州", "梨子");
-        dataset.addValue(300, "北京", "葡萄");
-        dataset.addValue(300, "上海", "葡萄");
-        dataset.addValue(300, "广州", "葡萄");
-        dataset.addValue(400, "北京", "香蕉");
-        dataset.addValue(400, "上海", "香蕉");
-        dataset.addValue(400, "广州", "香蕉");
-        dataset.addValue(500, "北京", "荔枝");
-        dataset.addValue(500, "上海", "荔枝");
-        dataset.addValue(500, "广州", "荔枝");
+    public static CategoryDataset PM2_2() {
+        double[][] data = new double[][] { { 23.9, 20.6, 20.4, 17.2, 15.1, 14.1, 12.3} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "薛城区", "峄城区", "山亭区", "高新区", "滕州市", "市中区","台儿庄区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    // 创建CategoryDataset对象
+    public static CategoryDataset PM10_1() {
+        double[][] data = new double[][] { { 130, 154, 154, 161, 163, 164, 164} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "山亭区", "滕州市", "薛城区", "高新区 ", "台儿庄区", "市中区","峄城区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset PM10_2() {
+        double[][] data = new double[][] { { -4.8, -11.6, -14.7, -15.6, -15.8, -16.8, -20.1} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "山亭区", "薛城区", "市中区", "台儿庄区 ", "滕州市", "峄城区","高新区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset SO2_1() {
+        double[][] data = new double[][] { { 13, 15, 17, 18, 19, 22, 23} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "台儿庄区", "山亭区", "市中区", "峄城区 ", "薛城区", "高新区","滕州市" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset SO2_2() {
+        double[][] data = new double[][] { { 31.8, 18.8, 15.0, 4.2, -5.9, -11.8, -83.3} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "山亭区", "台儿庄区", "市中区", "滕州市 ", "峄城区", "薛城区","高新区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset NO2_1() {
+        double[][] data = new double[][] { { 38, 44, 46, 48, 49, 52, 52} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "山亭区", "薛城区", "台儿庄区", "峄城区 ", "滕州市", "市中区","高新区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset NO2_2() {
+        double[][] data = new double[][] { { -7.3, -15.6, -16.7, -20.9, -24.3, -31.0, -41.2} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "薛城区", "高新区", "滕州市", "市中区 ", "台儿庄区", "山亭区","峄城区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset O3_1() {
+        double[][] data = new double[][] { { 80, 81, 86, 86, 87, 88, 91} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "市中区", "高新区", "滕州市", "峄城区 ", "台儿庄区", "薛城区","山亭区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    public static CategoryDataset O3_2() {
+        double[][] data = new double[][] { { 16.7, 9.5, 9.0, 8.5, 4.2, 1.1, 0.0} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "市中区", "峄城区", "高新区", "滕州市 ", "山亭区", "台儿庄区","薛城区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
         return dataset;
     }
 }

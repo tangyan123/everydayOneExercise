@@ -2,18 +2,23 @@ package com.ty.demo.utils;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.annotations.CategoryTextAnnotation;
 import org.jfree.chart.axis.*;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.LengthAdjustmentType;
+import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
 
 import java.awt.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class FormatPic {
     /**
@@ -42,6 +47,19 @@ public class FormatPic {
         jfreechart.setBackgroundPaint(Color.white);
 
         CategoryPlot plot = jfreechart.getCategoryPlot();// 获得图表区域对象
+
+        ValueMarker valuemarker = new ValueMarker(100D);  // 水平线的值
+        valuemarker.setLabelOffsetType(LengthAdjustmentType.EXPAND);
+        valuemarker.setPaint(Color.red);  //线条颜色
+        valuemarker.setStroke(new BasicStroke(1F));  //粗细
+//        valuemarker.setLabel("Temperature Threshold");   //线条上显示的文本
+//        valuemarker.setLabelFont(new Font("SansSerif", 0, 11)); //文本格式
+//        valuemarker.setLabelPaint(Color.red);
+//        valuemarker.setLabelAnchor(RectangleAnchor.TOP_LEFT);
+//        valuemarker.setLabelTextAnchor(TextAnchor.BOTTOM_LEFT);
+        plot.addRangeMarker(valuemarker);
+
+
 
         // 设置横虚线可见
         plot.setRangeGridlinesVisible(true);
@@ -88,6 +106,7 @@ public class FormatPic {
         // 设置最低的一个 Item 与图片底端的距离
         rangeAxis.setLowerMargin(0.15);
       //  rangeAxis.setVerticalTickLabels(true);
+
         plot.setRangeAxis(rangeAxis);
 
         // 解决中文乱码问题(关键)
@@ -101,6 +120,17 @@ public class FormatPic {
 
         // 使用自定义的渲染器
         CustomRenderer renderer = new CustomRenderer();
+        ArrayList<Double> data = new ArrayList<Double>();
+        data.add(80D);
+        data.add( 81D);
+        data.add(89D);
+        data.add(81D);
+        data.add(-10D);
+        data.add(-13.3D);
+        data.add(12D);
+        data.add(33D);
+        renderer.setData(data);
+        renderer.setType("IMPROVEMENT_RATE");
         // 设置柱子宽度
         renderer.setMaximumBarWidth(0.2);
         // 设置柱子高度
