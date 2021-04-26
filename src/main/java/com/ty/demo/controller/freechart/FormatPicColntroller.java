@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FormatPicColntroller {
     /**
@@ -34,11 +36,18 @@ public class FormatPicColntroller {
      */
     public static void main(String[] args) {
         // 步骤1：创建CategoryDataset对象（准备数据）-1.57D
-        CategoryDataset dataset = O3_1();
+        CategoryDataset dataset = qqq();
         // 步骤2：根据Dataset 生成JFreeChart对象，以及做相应的设置
-        JFreeChart freeChart =FormatPic.createChart(dataset,10D);
+        //数据
+        List<Double>data=new ArrayList<>();
+        //类型
+        String type="";
+        CustomRenderer renderer =new CustomRenderer();
+        renderer.setData(data);
+        renderer.setType(type);
+        JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
         // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
-        saveAsFile(freeChart, "E:\\formatPic\\O3Test_2.png", 500, 400);
+        saveAsFile(freeChart, "E:\\formatPic\\qqq.png", 500, 400);
     }
 
     // 保存为文件
@@ -70,10 +79,16 @@ public class FormatPicColntroller {
 
 
     // 创建CategoryDataset对象
-    public static CategoryDataset PM2_1() {
-        double[][] data = new double[][] { { 74, 82, 83, 85, 85, 90, 93} };
+    public static CategoryDataset PM2_1( double[][] data,String[] columnKeys) {
         String[] rowKeys ={""};
-        String[] columnKeys = { "山亭区", "高新区", "薛城区", "市中区", "峄城区", "滕州市","台儿庄区" };
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
+        return dataset;
+    }
+    // 创建CategoryDataset对象
+    public static CategoryDataset qqq() {
+        double[][] data = new double[][] { { 74, 82, 83, 85} };
+        String[] rowKeys ={""};
+        String[] columnKeys = { "苹果", "橘子", "香蕉", "西瓜" };
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);
         return dataset;
     }

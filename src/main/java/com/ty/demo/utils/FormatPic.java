@@ -15,10 +15,12 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.LengthAdjustmentType;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FormatPic {
     /**
@@ -30,8 +32,8 @@ public class FormatPic {
      * @data: Nov 26, 2009
      * @time: 11:51:26 AM
      */
-    public static JFreeChart createChart(CategoryDataset categoryDataset,Double columnIntervalUnit) {
-        JFreeChart jfreechart = ChartFactory.createBarChart("O3 同比改善率 (%) ", // 标题
+    public static   JFreeChart createChart(CategoryDataset categoryDataset,String titleName,Double columnIntervalUnit,Boolean isInteger,CustomRenderer renderer) {
+        JFreeChart jfreechart = ChartFactory.createBarChart(titleName, // 标题
                 "", // categoryAxisLabel （category轴，横轴，X轴的标签）
                 "", // valueAxisLabel（value轴，纵轴，Y轴的标签）
                 categoryDataset, // dataset
@@ -71,8 +73,15 @@ public class FormatPic {
         // 数据轴精度
         NumberAxis vn = (NumberAxis) plot.getRangeAxis();
         // vn.setAutoRangeIncludesZero(true);
-        DecimalFormat df = new DecimalFormat("#0.0");
-        vn.setNumberFormatOverride(df); // 数据轴数据标签的显示格式
+        //判断纵轴数据是小数还是整数
+        if (isInteger){
+            DecimalFormat df = new DecimalFormat("#0");
+            vn.setNumberFormatOverride(df); // 数据轴数据标签的显示格式
+        }else {
+            DecimalFormat df = new DecimalFormat("#0.0");
+            vn.setNumberFormatOverride(df); // 数据轴数据标签的显示格式
+        }
+
         //纵轴显示数值 为一个间隔单位
         vn.setTickUnit(new NumberTickUnit(columnIntervalUnit));
         // x轴设置
@@ -83,7 +92,6 @@ public class FormatPic {
         // domainAxis.setCategoryLabelPositions(CategoryLabelPositions
         // .createUpRotationLabelPositions(Math.PI / 3.0));
         domainAxis.setMaximumCategoryLabelWidthRatio(6.00f);// 横轴上的 Lable
-        // 是否完整显示
 
         // 设置距离图片左端距离
         domainAxis.setLowerMargin(0.1);
@@ -108,8 +116,26 @@ public class FormatPic {
       //  rangeAxis.setVerticalTickLabels(true);
 
         plot.setRangeAxis(rangeAxis);
+        //解决乱码
+        fontMessyCode(jfreechart,domainAxis,vn);
+        jfreechart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        //使用自定义的渲染器
+        CustomaApply(plot,renderer);
 
-        // 解决中文乱码问题(关键)
+
+        return jfreechart;
+    }
+    /**
+     * 解决中文乱码问题(关键)
+     *
+     * @param
+     * @returnType: void
+     * @author:
+     * @data: Nov 26, 2009
+     * @time: 11:51:26 AM
+     */
+    private static void fontMessyCode( JFreeChart jfreechart,CategoryAxis domainAxis,NumberAxis vn  ){
+        //
         TextTitle textTitle = jfreechart.getTitle();
         textTitle.setFont(new Font("黑体", Font.PLAIN, 20));
         domainAxis.setTickLabelFont(new Font("sans-serif", Font.PLAIN, 11));
@@ -117,20 +143,18 @@ public class FormatPic {
         vn.setTickLabelFont(new Font("sans-serif", Font.PLAIN, 12));
         vn.setLabelFont(new Font("黑体", Font.PLAIN, 12));
         // jfreechart.getLegend().setItemFont(new Font("宋体", Font.PLAIN, 12));
+    }
+    /**
+     * 使用自定义的渲染器
+     *
+     * @param
+     * @returnType: void
+     * @author:
+     * @data: Nov 26, 2009
+     * @time: 11:51:26 AM
+     */
+    private static  void    CustomaApply( CategoryPlot plot,CustomRenderer renderer){
 
-        // 使用自定义的渲染器
-        CustomRenderer renderer = new CustomRenderer();
-        ArrayList<Double> data = new ArrayList<Double>();
-        data.add(80D);
-        data.add( 81D);
-        data.add(89D);
-        data.add(81D);
-        data.add(-10D);
-        data.add(-13.3D);
-        data.add(12D);
-        data.add(33D);
-        renderer.setData(data);
-        renderer.setType("IMPROVEMENT_RATE");
         // 设置柱子宽度
         renderer.setMaximumBarWidth(0.2);
         // 设置柱子高度
@@ -141,9 +165,8 @@ public class FormatPic {
         renderer.setDrawBarOutline(true);
         // 设置每个地区所包含的平行柱的之间距离
         renderer.setItemMargin(0.5);
-        jfreechart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         //数据标签的字体
-     //   renderer.setBaseItemLabelFont(new Font("宋体", Font.PLAIN, 8));
+        //   renderer.setBaseItemLabelFont(new Font("宋体", Font.PLAIN, 8));
         // 显示每个柱的数值，并修改该数值的字体属性
         renderer.setIncludeBaseInRange(true);
         renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
@@ -158,7 +181,7 @@ public class FormatPic {
 //        renderer.setNegativeItemLabelPosition(itemLabelPosition);
 
 
-         //设置不能在柱子上正常显示的那些数值的显示方式，将这些数值显示在柱子外面
+        //设置不能在柱子上正常显示的那些数值的显示方式，将这些数值显示在柱子外面
         ItemLabelPosition itemLabelPositionFallback=new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE12, TextAnchor.BASELINE_LEFT,
                 TextAnchor.HALF_ASCENT_LEFT,0D);
@@ -170,7 +193,5 @@ public class FormatPic {
         plot.setForegroundAlpha(1.0f);
         // 背景色 透明度
         plot.setBackgroundAlpha(0.5f);
-
-        return jfreechart;
     }
 }

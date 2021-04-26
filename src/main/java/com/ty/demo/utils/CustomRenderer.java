@@ -6,6 +6,8 @@ import org.jfree.chart.renderer.category.BarRenderer3D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class CustomRenderer extends BarRenderer3D {
 
@@ -29,7 +31,7 @@ public class CustomRenderer extends BarRenderer3D {
    /**
      * 柱子数据
      */
-    private ArrayList<Double> data;
+    private List<Double> data;
 
 
 
