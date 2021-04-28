@@ -14,17 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 public class LogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("拦截器preHandle------------------");
+        //log.info("拦截器preHandle------------------");
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("拦截器postHandle------------------");
+        //log.info("拦截器postHandle------------------");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info("拦截器afterCompletion------------------");
+        //log.info("拦截器afterCompletion------------------");
     }
 }
