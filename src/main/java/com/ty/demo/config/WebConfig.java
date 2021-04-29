@@ -1,6 +1,7 @@
 package com.ty.demo.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,10 +17,17 @@ public class WebConfig implements WebMvcConfigurer {
             "/favicon.ico",
             "/error"
     };
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverterFactory(new MyStringToNumberConverterFactory());
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor())//添加拦截器
                 .addPathPatterns("/**")//拦截路径
                 .excludePathPatterns(knife4jPaths);//放行路径
     }
+
 }

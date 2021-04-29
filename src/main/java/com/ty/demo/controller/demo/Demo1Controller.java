@@ -4,9 +4,7 @@ import com.ty.demo.entity.Student;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -16,18 +14,17 @@ import java.util.Map;
 @Api( tags="测试")
 public class Demo1Controller {
 
-    @GetMapping("/test")
     @ApiOperation("测试1")
+    @GetMapping("/test")
     public String test1(){
         return "test";
     }
 
-
-    @GetMapping("/test2")
     @ApiOperation("测试2")
-    public Student test2(Student stu){
+    @PostMapping("/test2")
+    public Student  test2(@RequestBody Student stu){
         Student student=new Student();
         BeanUtils.copyProperties(stu,student);
-        return student;
+        return  student;
     }
 }

@@ -10,6 +10,7 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.ty.demo.entity.ExcelEntity;
 
 import com.ty.demo.entity.ExcelTest1;
+import com.ty.demo.entity.ExcelTest2;
 import com.ty.demo.utils.ExcelListener;
 import com.ty.demo.utils.ExcelUtil;
 import io.swagger.annotations.Api;
@@ -44,8 +45,8 @@ public class ExcelImportController {
             List<ExcelTest1>test1s=new ArrayList<ExcelTest1>();
             //EasyExcel.read(file.getInputStream(), ExcelTest1.class, new ExcelListener(test1s)).sheet().doRead();
 
-            ExcelListener excelListener=new ExcelListener(test1s);
-            ExcelReader reader = new ExcelReader(file.getInputStream(),null,excelListener);
+         //   ExcelListener excelListener=new ExcelListener(test1s);
+            ExcelReader reader = new ExcelReader(file.getInputStream(),null,new ExcelListener());
             //读取信息
             reader.read(new Sheet(1,0,ExcelTest1.class));
 
@@ -59,13 +60,12 @@ public class ExcelImportController {
     public  void excelImport3(MultipartFile file)  {
 
         try {
-            List<ExcelTest1>test1s=new ArrayList<ExcelTest1>();
-            ExcelListener excelListener=new ExcelListener(test1s);
+            ExcelListener excelListener=new ExcelListener();
             ExcelReader excelReader = EasyExcelFactory.getReader(file.getInputStream(),excelListener);
             List<Sheet> sheets=excelReader.getSheets();
             for (Sheet sheet : sheets) {
                 if (sheet.getSheetNo()==1){
-                    sheet.setClazz(ExcelTest1.class);
+                    sheet.setClazz(ExcelTest2.class);
                 }else if (sheet.getSheetNo()==2)
                 {
                     sheet.setClazz(ExcelTest1.class);
@@ -73,7 +73,7 @@ public class ExcelImportController {
                 sheet.setHeadLineMun(0);
                 excelReader.read(sheet);
             }
-            test1s.forEach(t -> System.out.println(t));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
