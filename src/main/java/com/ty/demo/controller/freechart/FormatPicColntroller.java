@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FormatPicColntroller {
@@ -39,13 +40,18 @@ public class FormatPicColntroller {
         CategoryDataset dataset = qqq();
         // 步骤2：根据Dataset 生成JFreeChart对象，以及做相应的设置
         //数据
-        List<Double>data=new ArrayList<>();
+        List<Double>data=new ArrayList<Double>();
+        data.add(74D);
+        data.add( 82D);
+        data.add( 83D);
+        data.add( 85D);
         //类型
         String type="";
         CustomRenderer renderer =new CustomRenderer();
         renderer.setData(data);
         renderer.setType(type);
-        JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
+      //  JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
+        JFreeChart freeChart =FormatPic.warningLineChart(dataset,"水果",10D,false,renderer,40D);
         // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
         saveAsFile(freeChart, "E:\\formatPic\\qqq.png", 500, 400);
     }
