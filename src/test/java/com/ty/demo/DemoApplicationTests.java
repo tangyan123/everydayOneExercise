@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,8 @@ import java.util.stream.Collectors;
 class DemoApplicationTests {
 
     public static void main(String[] args) {
-        Assert.isTrue(true,"true");
+
+        System.out.println(LocalDateTime.now().plusDays(1));
     }
 
 }

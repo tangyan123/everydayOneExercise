@@ -11,7 +11,10 @@ public class ExcelTest2 extends BaseRowModel implements Serializable{
 
         @ExcelProperty(index = 0)
         private  String no;
+
+        @ExcelProperty(index=1)
         private  String name;
+
         @ExcelProperty(value = {"SO2均值(μg/m3)_本期"},index = 2)
         private  String so2_1;
 

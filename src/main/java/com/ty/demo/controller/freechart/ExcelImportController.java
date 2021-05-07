@@ -58,10 +58,10 @@ public class ExcelImportController {
     @ApiOperation("excel导入3")
     @PostMapping("/excle3")
     public  void excelImport3(MultipartFile file)  {
-
+        ExcelReader excelReader=null;
         try {
             ExcelListener excelListener=new ExcelListener();
-            ExcelReader excelReader = EasyExcelFactory.getReader(file.getInputStream(),excelListener);
+            excelReader = EasyExcelFactory.getReader(file.getInputStream(),excelListener);
             List<Sheet> sheets=excelReader.getSheets();
             for (Sheet sheet : sheets) {
                 if (sheet.getSheetNo()==1){
@@ -73,9 +73,12 @@ public class ExcelImportController {
                 sheet.setHeadLineMun(0);
                 excelReader.read(sheet);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (excelReader!=null){
+                excelReader.finish();
+            }
         }
     }
 }
