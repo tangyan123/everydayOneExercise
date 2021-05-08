@@ -26,3 +26,10 @@ knife4j:
     enable: false # �����ĵ�����Ȩ�ޣ��״η��ʣ������������������Ҫ�������û������룩
     username: admin # �˺�
     password: 123456
+
+jodconverter:
+  local:
+    enabled: true
+    office-home: C:\Program Files (x86)\OpenOffice 4\
+    max-tasks-per-process: 10
+    port-numbers: 8100
