@@ -10,22 +10,31 @@ import java.io.Serializable;
 import java.util.List;
 @Data
 public class ExcelTest1  extends BaseRowModel implements Serializable{
-        @ExcelProperty(index=0)
-        private  String city;
 
-        @ExcelProperty(index=1)
-        private  String  fineDay;
 
-        @ExcelProperty(index=2)
-        private  String  fineRate;
+        @ExcelProperty(value = "区（市）",index=2)
+        private String name;
 
         @ExcelProperty(index=3)
-        private  String  fineCompareAddRate;
+        private String fineDays;
 
         @ExcelProperty(index=4)
-        private  String  heavyPollutionDay;
+        private String goodRate;
 
         @ExcelProperty(index=5)
-        private  String  heavyPollutionCompareAddDay;
+        private String fineBasis;
+
+        @ExcelProperty(index=6)
+        private String pollutionDays;
+
+        @ExcelProperty(index=7)
+        private String pollutionBasis;
+        private Integer id;
+
+        private Integer reportId;
+
+        private String chieflyPollutant;
+
+        private String pm10Days;
 
 }

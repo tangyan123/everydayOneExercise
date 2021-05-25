@@ -65,8 +65,8 @@ public class FormatPic {
         //
         TextTitle textTitle = jfreechart.getTitle();
         textTitle.setFont(new Font("黑体", Font.PLAIN, 20));
-        domainAxis.setTickLabelFont(new Font("sans-serif", Font.PLAIN, 11));
-        domainAxis.setLabelFont(new Font("宋体", Font.PLAIN, 12));
+        domainAxis.setTickLabelFont(new Font("sans-serif", Font.PLAIN, 12));
+        domainAxis.setLabelFont(new Font("黑体", Font.PLAIN, 12));
         vn.setTickLabelFont(new Font("sans-serif", Font.PLAIN, 12));
         vn.setLabelFont(new Font("黑体", Font.PLAIN, 12));
         // jfreechart.getLegend().setItemFont(new Font("宋体", Font.PLAIN, 12));

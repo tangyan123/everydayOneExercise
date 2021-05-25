@@ -9,73 +9,118 @@ import java.io.Serializable;
 @Data
 public class ExcelTest2 extends BaseRowModel implements Serializable{
 
-        @ExcelProperty(index = 0)
-        private  String no;
+        private Integer id;
+
+        private Integer reportId;
 
         @ExcelProperty(index=1)
-        private  String name;
+        private String name;
 
-        @ExcelProperty(value = {"SO2均值(μg/m3)_本期"},index = 2)
-        private  String so2_1;
+        @ExcelProperty(index=2)
+        private String so2Now;
 
-        @ExcelProperty(value = {"SO2均值(μg/m3)_去年同期"},index=3)
-        private  String  so2_2;
+        @ExcelProperty(index=3)
+        private String so2Last;
 
-        @ExcelProperty( value= {"SO2均值(μg/m3)_同比（%）"},index=4)
-        private  String  so2_3;
+        @ExcelProperty(index=4)
+        private String so2Basis;
 
-        @ExcelProperty(value= {"NO2均值(μg/m3)_本期"},index=5)
-        private  String  no2_1;
+        @ExcelProperty(index=5)
+        private String so2Ranking;
 
-        @ExcelProperty(value= {"NO2均值(μg/m3)_去年同期"},index=6)
-        private  String  no2_2;
+        @ExcelProperty(index=6)
+        private String no2Now;
 
-        @ExcelProperty(value= {"NO2均值(μg/m3)_同比（%）"},index=7)
-        private  String  no2_3;
+        @ExcelProperty(index=7)
+        private String no2Last;
 
-        @ExcelProperty(value= {"PM10均值(μg/m3)_本期"},index=8)
-        private  String  pm10_1;
+        @ExcelProperty(index=8)
+        private String no2Basis;
 
-        @ExcelProperty(value= {"PM10均值(μg/m3)_去年同期"},index=9)
-        private  String  pm10_2;
+        @ExcelProperty(index=9)
+        private String no2Ranking;
 
-        @ExcelProperty(value= {"PM10均值(μg/m3)_同比（%）"},index=10)
-        private  String  pm10_3;
+        @ExcelProperty(index=10)
+        private String pm10Now;
 
-        @ExcelProperty(value= {"PM2.5均值(μg/m3)_本期"},index=11)
-        private  String  pm25_1;
+        @ExcelProperty(index=11)
+        private String pm10Last;
 
-        @ExcelProperty(value= {"PM2.5均值(μg/m3)_去年同期"},index=12)
-        private  String  pm25_2;
+        @ExcelProperty(index=12)
+        private String pm10Basis;
 
-        @ExcelProperty(value= {"PM2.5均值(μg/m3)_同比（%）"},index=13)
-        private  String  pm25_3;
+        @ExcelProperty(index=13)
+        private String pm10Ranking;
 
-        @ExcelProperty(value= {"O3-95per(mg/m3)_本期"},index=14)
-        private  String  o3_1;
+        @ExcelProperty(index=14)
+        private String pm25Now;
 
-        @ExcelProperty(value= {"O3-95per(mg/m3)_去年同期"},index=15)
-        private  String  o3_2;
+        @ExcelProperty(index=15)
+        private String pm25Last;
 
-        @ExcelProperty(value= {"O3-95per(mg/m3)_同比（%）"},index=16)
-        private  String  o3_3;
+        @ExcelProperty(index=16)
+        private String pm25Basis;
 
-        @ExcelProperty(value= {"CO-95per(mg/m3)_本期"},index=17)
-        private  String  co_1;
+        @ExcelProperty(index=17)
+        private String pm25Ranking;
 
-        @ExcelProperty(value= {"CO-95per(mg/m3)_去年同期"},index=18)
-        private  String  co_2;
+        @ExcelProperty(index=18)
+        private String o3Now;
 
-        @ExcelProperty(value= {"CO-95per(mg/m3)_同比（%）"},index=19)
-        private  String  co_3;
+        @ExcelProperty(index=19)
+        private String o3Last;
 
-        @ExcelProperty(value= {"综合指数_本期"},index=20)
-        private  String  zhzs_1;
+        @ExcelProperty(index=20)
+        private String o3Basis;
 
-        @ExcelProperty(value= {"综合指数_去年同期"},index=21)
-        private  String  zhzs_2;
+        @ExcelProperty(index=21)
+        private String o3Ranking;
 
-        @ExcelProperty(value= {"综合指数_同比（%）"},index=22)
-        private  String  zhzs_3;
+        @ExcelProperty(index=22)
+        private String coNow;
 
+        @ExcelProperty(index=23)
+        private String coLast;
+
+        @ExcelProperty(index=24)
+        private String coBasis;
+
+        @ExcelProperty(index=25)
+        private String coRanking;
+
+        @ExcelProperty(index=26)
+        private String synthesizeNow;
+
+        @ExcelProperty(index=27)
+        private String synthesizeLast;
+
+        @ExcelProperty(index=28)
+        private String synthesizeBasis;
+
+        @ExcelProperty(index=29)
+        private String synthesizeRanking;
+
+        @ExcelProperty(index=30)
+        private String rateNow;
+
+        @ExcelProperty(index=31)
+        private String rateLast;
+
+        @ExcelProperty(index=32)
+        private String rateBasis;
+
+        @ExcelProperty(index=33)
+        private String rateRanking;
+
+        @ExcelProperty(index=34)
+        private String pollutionNow;
+
+        @ExcelProperty(index=35)
+        private String pollutionLast;
+
+        @ExcelProperty(index=36)
+        private String pollutionBasis;
+
+        @ExcelProperty(index=37)
+        private String pollutionRanking;
 }

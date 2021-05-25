@@ -37,21 +37,24 @@ public class FormatPicColntroller {
      */
     public static void main(String[] args) {
         // 步骤1：创建CategoryDataset对象（准备数据）-1.57D
-        CategoryDataset dataset = qqq();
+        CategoryDataset dataset = PM2_2();
         // 步骤2：根据Dataset 生成JFreeChart对象，以及做相应的设置
         //数据
         List<Double>data=new ArrayList<Double>();
-        data.add(74D);
-        data.add( 82D);
-        data.add( 83D);
-        data.add( 85D);
+        data.add(23.9);
+        data.add( 20.6);
+        data.add( 20.4);
+        data.add( 17.2);
+        data.add( 15.1);
+        data.add( 14.1);
+        data.add( 12.3);
         //类型
         String type="";
         CustomRenderer renderer =new CustomRenderer();
         renderer.setData(data);
         renderer.setType(type);
-      //  JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
-        JFreeChart freeChart =FormatPic.warningLineChart(dataset,"水果",10D,false,renderer,40D);
+        JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
+       // JFreeChart freeChart =FormatPic.warningLineChart(dataset,"",10D,false,renderer,40D);
         // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
         saveAsFile(freeChart, "E:\\formatPic\\qqq.png", 500, 400);
     }

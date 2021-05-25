@@ -1,6 +1,7 @@
 package com.ty.demo.controller.freechart;
 
 import cn.afterturn.easypoi.entity.ImageEntity;
+import com.ty.demo.entity.ExcelTest1;
 import com.ty.demo.utils.JfreeUtil;
 import com.ty.demo.utils.WordUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +31,16 @@ public class WordTestColntroller {
             System.out.println(s.substring(13)+"---"+image.getUrl());
             map.put(s.substring(13), image);
         }
-        map.put("createDate","2021年04月25日");
+
         map.put("month",4);
+        ExcelTest1 excelTest1=new ExcelTest1();
+        LocalDateTime localDateTime=LocalDateTime.now();
+        map.put("createDate",localDateTime);
+        excelTest1.setPm10Days("2020-01-01");
+        excelTest1.setName("haha");
+       // excelTest1.setPm10Days("100");
+        excelTest1.setPm10Days("");
+        map.put("excelTest1",excelTest1);
         map.put("year","2021");
       /*  //模拟其它普通数据
         map.put("username", "张三");
