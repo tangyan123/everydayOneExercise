@@ -7,6 +7,7 @@ import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 @Data
 public class ExcelTest1  extends BaseRowModel implements Serializable{
@@ -35,6 +36,6 @@ public class ExcelTest1  extends BaseRowModel implements Serializable{
 
         private String chieflyPollutant;
 
-        private String pm10Days;
+        private BigDecimal pm10Days;
 
 }

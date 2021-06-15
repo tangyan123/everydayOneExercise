@@ -53,10 +53,10 @@ public class FormatPicColntroller {
         CustomRenderer renderer =new CustomRenderer();
         renderer.setData(data);
         renderer.setType(type);
-        JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
-       // JFreeChart freeChart =FormatPic.warningLineChart(dataset,"",10D,false,renderer,40D);
+      // JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
+       JFreeChart freeChart =FormatPic.warningLineChart(dataset,"水果",10D,false,renderer,15D);
         // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
-        saveAsFile(freeChart, "E:\\formatPic\\qqq.png", 500, 400);
+        saveAsFile(freeChart, "E:\\formatPic\\11111.png", 500, 400);
     }
 
     // 保存为文件
@@ -102,7 +102,7 @@ public class FormatPicColntroller {
         return dataset;
     }
     public static CategoryDataset PM2_2() {
-        double[][] data = new double[][] { { 23.9, 20.6, 20.4, 17.2, 15.1, 14.1, 12.3} };
+        double[][] data = new double[][] { { 23.9, 20.6, 20.4, 17.2, 15.1, -14.1, -12.3} };
         String[] rowKeys ={""};
         String[] columnKeys = { "薛城区", "峄城区", "山亭区", "高新区", "滕州市", "市中区","台儿庄区" };
         CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, columnKeys, data);

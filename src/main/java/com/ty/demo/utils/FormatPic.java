@@ -97,13 +97,13 @@ public class FormatPic {
         renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         renderer.setBaseItemLabelsVisible(true);
 
-//        //设置柱子上显示的数据旋转90度,最后一个参数为旋转的角度值/3.14
-//        ItemLabelPosition itemLabelPosition= new ItemLabelPosition(
-//                ItemLabelAnchor.INSIDE12,TextAnchor.CENTER_RIGHT,
-//                TextAnchor.CENTER_RIGHT,-1.57D);
-//        //设置正常显示的柱子label的position
-//        renderer.setPositiveItemLabelPosition(itemLabelPosition);
-//        renderer.setNegativeItemLabelPosition(itemLabelPosition);
+        //设置柱子上显示的数据旋转90度,最后一个参数为旋转的角度值/3.14
+        ItemLabelPosition itemLabelPosition= new ItemLabelPosition(
+                ItemLabelAnchor.OUTSIDE12,TextAnchor.BASELINE_CENTER,
+                TextAnchor.HALF_ASCENT_CENTER,0D);
+        //设置正常显示的柱子label的position
+        renderer.setPositiveItemLabelPosition(itemLabelPosition);
+        renderer.setNegativeItemLabelPosition(itemLabelPosition);
 
 
         //设置不能在柱子上正常显示的那些数值的显示方式，将这些数值显示在柱子外面
@@ -237,7 +237,7 @@ public class FormatPic {
         ValueMarker valuemarker = new ValueMarker(warningLineUnit);  // 水平线的值
         valuemarker.setLabelOffsetType(LengthAdjustmentType.EXPAND);
         valuemarker.setPaint(Color.red);  //线条颜色
-        valuemarker.setStroke(new BasicStroke(1F));  //粗细
+        valuemarker.setStroke(new BasicStroke(1.5F));  //粗细
 //        valuemarker.setLabel("Temperature Threshold");   //线条上显示的文本
 //        valuemarker.setLabelFont(new Font("SansSerif", 0, 11)); //文本格式
 //        valuemarker.setLabelPaint(Color.red);

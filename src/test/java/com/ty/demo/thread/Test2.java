@@ -1,15 +1,20 @@
 package com.ty.demo.thread;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ty.demo.entity.ExcelTest1;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.jodconverter.DocumentConverter;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -18,27 +23,11 @@ import java.util.*;
 @Slf4j
 public class Test2 {
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    public static void main(String[] args) {
-        String imagePath="D:\\ar\\report";
-        File fileTemp = new File(imagePath);
-        // 判断文件是否存在
-        boolean falg = false;
-        falg = fileTemp.exists();
-        if (falg) {
-            //判断是不是目录
-            if (true == fileTemp.isDirectory()) {
-                //获取图片
-                String[] png = fileTemp.list();
-                for (int i = 0; i < png.length; i++) {
-                    if (true == png[i].endsWith("png")||true == png[i].endsWith("pdf")) {
-                        File file = new File(imagePath +File.separator+ png[i]);
-                        if (true == file.isFile()) {
-                            file.delete();
-                        }
-                    }
-                }
-            }
-        }
+    public static void main(String[] args) throws NoSuchFieldException {
+        String minBasis="2.21";
+        DecimalFormat df   = new DecimalFormat("######0.0");
+        System.out.println(df.format(((float) 8/65)*100));
+
     }
     public static <T> T convertObjectByJackson(Object origin, Class<T> targetClazz, T defaultVal) {
         try {

@@ -2,6 +2,7 @@ package com.ty.demo.utils;
 
 import com.ty.demo.dto.TypeEum;
 import lombok.Data;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.BarRenderer3D;
 
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class CustomRenderer extends BarRenderer3D {
+public class CustomRenderer extends BarRenderer {
 
     private static final long serialVersionUID = 784630226449158436L;
     /**

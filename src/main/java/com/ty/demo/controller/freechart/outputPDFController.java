@@ -37,13 +37,13 @@ public class outputPDFController {
     @GetMapping("/pdf")
     @ApiOperation(value = "PDF")
     public void toPdfFile(HttpServletResponse response){
-        File file = new File("E:\\formatPic\\test.docx");//需要转换的文件
+        File file = new File("C:\\Users\\2020\\Desktop\\工业源.xlsx");//需要转换的文件
         try {
-            File newFile = new File("E:\\formatPic\\");//转换之后文件生成的地址
+            File newFile = new File("C:\\Users\\2020\\Desktop\\");//转换之后文件生成的地址
             if (!newFile.exists()) {
                 newFile.mkdirs();
             }
-            String savePath="E:\\formatPic\\"; //pdf文件生成保存的路径
+            String savePath="C:\\Users\\2020\\Desktop\\"; //pdf文件生成保存的路径
             String fileName="JCccc"+ UUID.randomUUID().toString().replaceAll("-","").substring(0,6);
             String fileType=".pdf"; //pdf文件后缀
             String newFileMix=savePath+fileName+fileType;  //将这三个拼接起来,就是我们最后生成文件保存的完整访问路径了

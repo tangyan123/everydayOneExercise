@@ -1,11 +1,19 @@
 package com.ty.demo.controller.freechart;
 
 import cn.afterturn.easypoi.entity.ImageEntity;
+import cn.afterturn.easypoi.excel.entity.ExcelBaseParams;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
+import cn.afterturn.easypoi.excel.entity.params.ExcelForEachParams;
+import cn.afterturn.easypoi.excel.export.styler.IExcelExportStyler;
 import com.ty.demo.entity.ExcelTest1;
 import com.ty.demo.utils.JfreeUtil;
 import com.ty.demo.utils.WordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.analysis.function.Add;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -16,6 +24,10 @@ import java.util.List;
 
 @Slf4j
 public class WordTestColntroller {
+    /**
+     * 数据行样式
+     */
+    private CellStyle styles;
     public static void main(String[] args) {
         HashMap<String, Object> map = new HashMap<>(20);
         //模拟饼状图数据
@@ -36,10 +48,10 @@ public class WordTestColntroller {
         ExcelTest1 excelTest1=new ExcelTest1();
         LocalDateTime localDateTime=LocalDateTime.now();
         map.put("createDate",localDateTime);
-        excelTest1.setPm10Days("2020-01-01");
-        excelTest1.setName("haha");
-       // excelTest1.setPm10Days("100");
-        excelTest1.setPm10Days("");
+//        excelTest1.setPm10Days("2020-01-01");
+//        excelTest1.setName("haha");
+//       // excelTest1.setPm10Days("100");
+//        excelTest1.setPm10Days("0%；");
         map.put("excelTest1",excelTest1);
         map.put("year","2021");
       /*  //模拟其它普通数据
@@ -79,4 +91,6 @@ public class WordTestColntroller {
         return  pathList;
 
     }
+
+
 }
