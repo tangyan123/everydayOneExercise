@@ -96,20 +96,21 @@ public class FormatPic {
         renderer.setIncludeBaseInRange(true);
         renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         renderer.setBaseItemLabelsVisible(true);
+        renderer.setItemLabelAnchorOffset(0);
 
-        //设置柱子上显示的数据旋转90度,最后一个参数为旋转的角度值/3.14
-        ItemLabelPosition itemLabelPosition= new ItemLabelPosition(
-                ItemLabelAnchor.OUTSIDE12,TextAnchor.BASELINE_CENTER,
-                TextAnchor.HALF_ASCENT_CENTER,0D);
-        //设置正常显示的柱子label的position
-        renderer.setPositiveItemLabelPosition(itemLabelPosition);
-        renderer.setNegativeItemLabelPosition(itemLabelPosition);
+//        //设置柱子上显示的数据旋转90度,最后一个参数为旋转的角度值/3.14
+//        ItemLabelPosition itemLabelPosition= new ItemLabelPosition(
+//                ItemLabelAnchor.OUTSIDE12,TextAnchor.BASELINE_CENTER,
+//                TextAnchor.HALF_ASCENT_CENTER,0D);
+//        //设置正常显示的柱子label的position
+//        renderer.setPositiveItemLabelPosition(itemLabelPosition);
+//        renderer.setNegativeItemLabelPosition(itemLabelPosition);
 
 
         //设置不能在柱子上正常显示的那些数值的显示方式，将这些数值显示在柱子外面
         ItemLabelPosition itemLabelPositionFallback=new ItemLabelPosition(
-                ItemLabelAnchor.OUTSIDE12, TextAnchor.BASELINE_LEFT,
-                TextAnchor.HALF_ASCENT_LEFT,0D);
+                ItemLabelAnchor.OUTSIDE5, TextAnchor.BASELINE_CENTER,
+                TextAnchor.HALF_ASCENT_CENTER,0D);
         //设置不能正常显示的柱子label的position
         renderer.setPositiveItemLabelPositionFallback(itemLabelPositionFallback);
         renderer.setNegativeItemLabelPositionFallback(itemLabelPositionFallback);
@@ -147,6 +148,8 @@ public class FormatPic {
     private static NumberAxis setLongitudinalAxis(CategoryPlot plot,Double columnIntervalUnit,Boolean isInteger){
         // 数据轴精度
         NumberAxis vn = (NumberAxis) plot.getRangeAxis();
+        //设置最高的一个柱与图片顶端的距离(最高柱的10%)
+        vn.setUpperMargin(0.3);
         // vn.setAutoRangeIncludesZero(true);
         //判断纵轴数据是小数还是整数
         if (isInteger){

@@ -43,11 +43,11 @@ public class FormatPicColntroller {
         List<Double>data=new ArrayList<Double>();
         data.add(23.9);
         data.add( 20.6);
-        data.add( 20.4);
-        data.add( 17.2);
-        data.add( 15.1);
-        data.add( 14.1);
-        data.add( 12.3);
+        data.add( -20.4);
+        data.add( -17.2);
+        data.add( -15.1);
+        data.add( -14.1);
+        data.add( -12.3);
         //类型
         String type="";
         CustomRenderer renderer =new CustomRenderer();
@@ -56,7 +56,7 @@ public class FormatPicColntroller {
       // JFreeChart freeChart =FormatPic.createChart(dataset,"水果",10D,false,renderer);
        JFreeChart freeChart =FormatPic.warningLineChart(dataset,"水果",10D,false,renderer,15D);
         // 步骤3：将JFreeChart对象输出到文件，Servlet输出流等
-        saveAsFile(freeChart, "E:\\formatPic\\11111.png", 500, 400);
+        saveAsFile(freeChart, "E:\\formatPic\\123.png", 500, 400);
     }
 
     // 保存为文件

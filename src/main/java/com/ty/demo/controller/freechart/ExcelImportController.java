@@ -16,18 +16,24 @@ import com.ty.demo.entity.ExcelTest2;
 import com.ty.demo.utils.ExcelListener;
 import com.ty.demo.utils.ExcelListener2;
 import com.ty.demo.utils.ExcelUtil;
+import com.ty.demo.utils.WordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.text.WordUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @Api(tags = "excel导入测试")
@@ -99,4 +105,55 @@ public class ExcelImportController {
       //  EasyExcel.read(fileName, DemoExtraData.class, new ExcelListener2()).extraRead(CellExtraTypeEnum.MERGE).sheet().doRead();
     }
 
+    @ApiOperation("Word导出")
+    @GetMapping("/Word5")
+    public @ResponseBody
+    void exportSellPlan(HttpServletRequest request, HttpServletResponse response) {
+        Calendar calendar = Calendar.getInstance();// 取当前日期。
+
+        String pm25NowImage = "D:\\ar\\image\\76c6f9941678458f89063e974ae20213.png";
+        String pm25BasisImage = "D:\\ar\\image\\e0a3d0a4355d4375b84fc7efc369c0ce.png";
+        //获得数据
+//        List<User> users = userService.getUsers();
+          Map<String, Object> map = new HashMap<String, Object>();
+          map.put("text", "我想大声告诉你，你一直在我世界里。");
+          List<String>list=new ArrayList<>();
+          list.add("PM10");
+          list.add("PM2.5");
+          list.add("SO2");
+          list.add("NO2");
+          list.add("O3");
+          map.put("text", "我想大声告诉你，你一直在我世界里。");
+          map.put("list", list);
+//        map.put("userList", users);
+          map.put("pm25NowImage", imageToBase64Str(pm25NowImage));
+          map.put("pm25BasisImage", imageToBase64Str(pm25BasisImage));
+        try {
+            WordUtil.exportMillCertificateWord(request, response, map, "方案", "year.ftl");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 图片转base64字符串
+     * @param imgFile 图片路径
+     * @return
+     */
+    public static String imageToBase64Str(String imgFile) {
+        InputStream inputStream = null;
+        byte[] data = null;
+        try {
+            inputStream = new FileInputStream(imgFile);
+            data = new byte[inputStream.available()];
+            inputStream.read(data);
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 加密
+        BASE64Encoder encoder = new BASE64Encoder();
+        return encoder.encode(data);
+    }
 }
