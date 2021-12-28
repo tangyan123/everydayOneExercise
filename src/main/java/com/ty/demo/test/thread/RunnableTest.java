@@ -1,4 +1,4 @@
-package com.ty.demo.thread;
+package com.ty.demo.test.thread;
 
 public class RunnableTest implements Runnable {
     private  String name;

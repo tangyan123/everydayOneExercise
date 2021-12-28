@@ -1,17 +1,11 @@
-package com.ty.demo.thread;
+package com.ty.demo.test.thread;
 
-import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.enums.CellExtraTypeEnum;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.metadata.CellExtra;
-import com.ty.demo.entity.ExcelTest1;
-import com.ty.demo.entity.ExcelTest2;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Slf4j

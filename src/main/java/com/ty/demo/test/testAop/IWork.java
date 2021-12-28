@@ -1,4 +1,4 @@
-package com.ty.demo.TestAop;
+package com.ty.demo.test.testAop;
 
 public interface IWork {
 

@@ -1,6 +1,4 @@
-package com.ty.demo.thread;
-
-import java.util.concurrent.Executors;
+package com.ty.demo.test.thread;
 
 public class executors {
 

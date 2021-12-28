@@ -1,8 +1,7 @@
-package com.ty.demo.thread;
+package com.ty.demo.test.thread;
 
 import sun.misc.Launcher;
 
-import java.awt.print.Book;
 import java.net.URL;
 
 

@@ -1,8 +1,7 @@
-package com.ty.demo.TestAop;
+package com.ty.demo.test.testAop;
 
-import org.junit.jupiter.api.Test;
 
-import javax.jws.Oneway;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 

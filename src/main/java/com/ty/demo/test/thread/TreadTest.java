@@ -1,4 +1,4 @@
-package com.ty.demo.thread;
+package com.ty.demo.test.thread;
 
 public class TreadTest extends Thread {
     private  String name;

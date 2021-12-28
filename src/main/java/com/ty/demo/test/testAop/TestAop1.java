@@ -1,4 +1,4 @@
-package com.ty.demo.TestAop;
+package com.ty.demo.test.testAop;
 
 public class TestAop1 {
     public static void main(String[] args) {
