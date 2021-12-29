@@ -13,15 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/**
- * 使用CompletableFuture场景
- * 执行比较耗时的操作时，尤其是那些依赖一个或多个远程服务的操作，使用异步任务可以改善程序的性能，加快程序的响应速度
- * 使用CompletableFuture类，它提供了异常管理的机制，让你有机会抛出、管理异步任务执行种发生的异常
- * 如果这些异步任务之间相互独立，或者他们之间的的某一些的结果是另一些的输入，你可以讲这些异步任务构造或合并成一个
- * 小贴士 ：测试多线程的小伙伴请勿使用JUit单元测试，因为JUnit在主线程完成之后就会关闭JVM，有兴趣的小伙伴请自行百度
- * @throws ExecutionException
- * @throws InterruptedException
- */
 public class CompletableFutureTest {
 
     void test1() throws ExecutionException, InterruptedException {
